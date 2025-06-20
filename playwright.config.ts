@@ -13,105 +13,58 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
   testDir: "./tests",
-  /* Run tests in files in parallel */
-  fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  retries: 0,
+  workers: 1,
   timeout: 99999999,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     // blob reporter is required, produced zip would be uploaded
-    // ["blob", { outputFile: "test-results/blob.zip" }],
-    // [
-    //   "@cyborgtests/reporter-playwright-reports-server",
-    //   {
-    //     // true by default. Use this if you need to skip this reporter for some cases (local executions for example)
-    //     enabled: false,
-    //     /**
-    //      * Your server url
-    //      * @see https://github.com/CyborgTests/playwright-reports-server
-    //      */
-    //     url: "http://localhost:3000",
-    //     // Set token if your server instance has authentication enabled
-    //     // token: '1234',
-    //     reportPath: "test-results/blob.zip",
-    //     // Any custom metadata to attach to this blob (strings)
-    //     resultDetails: {
-    //       manual: true,
-    //       executedBy: "Alex Hot",
-    //     },
-    //     // Automatically trigger HTML report generation, shards supported
-    //     triggerReportGeneration: false,
-    //   },
-    // ],
+    ["blob", { outputFile: "test-results/blob.zip" }],
+    [
+      "@cyborgtests/reporter-playwright-reports-server",
+      {
+        // true by default. Use this if you need to skip this reporter for some cases (local executions for example)
+        enabled: false,
+        /**
+         * Your server url
+         * @see https://github.com/CyborgTests/playwright-reports-server
+         */
+        url: "http://localhost:4000",
+        // Set token if your server instance has authentication enabled
+        // token: '1234',
+        reportPath: "test-results/blob.zip",
+        // Any custom metadata to attach to this blob (strings)
+        resultDetails: {
+          manual: true,
+          executedBy: process.env.CYBORGTESTS_OWNER || "unknown",
+          testRun: "demo-run-1",
+        },
+        // Automatically trigger HTML report generation, shards supported
+        triggerReportGeneration: false,
+      },
+    ],
     ["html"],
     ["list"],
   ],
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
-
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    // trace: "on",
-    // video: "on",
-    // screenshot: {
-    //   mode: "on",
-    //   fullPage: true,
-    // },
+    trace: "on",
+    video: "on",
+    screenshot: {
+      mode: "on",
+      fullPage: true,
+    },
     headless: false,
     baseURL: "https://shopdemo-alex-hot.koyeb.app/",
   },
-
-  /* Configure projects for major browsers */
   projects: [
     {
+      grep: new RegExp(process.env.CYBORGTESTS_OWNER || ""),
       name: "chromium",
-
       use: {
         ...devices["Desktop Chrome"],
       },
     },
-
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
-
-    // /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    // /* Test against branded browsers. */
-    // // {
-    // //   name: 'Microsoft Edge',
-    // //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
   ],
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 });

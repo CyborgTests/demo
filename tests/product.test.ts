@@ -1,6 +1,9 @@
-import test from "@cyborgtests/test";
+import { test as playwrightTest } from "@playwright/test";
+import cyborgTest from "@cyborgtests/test";
 import { expect } from "@playwright/test";
 import { OWNER } from "../tags";
+
+const test: typeof playwrightTest = cyborgTest;
 
 test(
   "products page should be displayed correctly",
