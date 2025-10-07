@@ -1,14 +1,21 @@
-import { test as playwrightTest } from "@playwright/test";
-import cyborgTest from "@cyborgtests/test";
+import test from "@cyborgtests/test";
 import { expect } from "@playwright/test";
 import { OWNER } from "../tags";
-
-const test: typeof playwrightTest = cyborgTest;
 
 test(
   "products page should be displayed correctly",
   {
     tag: [OWNER.KHOTEMSKYI],
+    annotation: [
+      {
+        type: "objective",
+        description: "Verify that the products page is displayed correctly",
+      },
+      {
+        type: "bug",
+        description: "https://github.com/CyborgTests/",
+      },
+    ]
   },
   async ({ page, manualStep }) => {
     await page.goto("/shop/brand/Nizhyn");

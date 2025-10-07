@@ -3,5 +3,8 @@
 node_modules/
 /test-results/
 /playwright-report/
+/coverage-reports/
 /blob-report/
 /playwright/.cache/
+.env
+.DS_Store
