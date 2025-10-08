@@ -11,7 +11,7 @@ test(
           "Verify that the homepage loads correctly and displays essential branding elements",
       },
     ],
-    tag: [OWNER.KHOTEMSKYI],
+    tag: [OWNER.O_KHOTEMSKYI],
   },
   async ({ page, manualStep }) => {
     await page.goto("/");
@@ -80,7 +80,7 @@ test(
         description: "Test the ability to add a product to the shopping cart",
       },
     ],
-    tag: [OWNER.KHOTEMSKYI],
+    tag: [OWNER.O_KHOTEMSKYI],
   },
   async ({ page, manualStep }) => {
     await page.goto("/product/cherry-tomatoes");
@@ -150,7 +150,7 @@ test(
         description: "Verify that registered users can log in successfully",
       },
     ],
-    tag: [OWNER.KHOTEMSKYI],
+    tag: [OWNER.O_KHOTEMSKYI],
   },
   async ({ page, manualStep }) => {
     await page.goto("/login");
@@ -222,7 +222,7 @@ test(
           "Verify that the search feature returns relevant product results",
       },
     ],
-    tag: [OWNER.KHOTEMSKYI],
+    tag: [OWNER.O_KHOTEMSKYI],
   },
   async ({ page, manualStep }) => {
     await page.goto("/");

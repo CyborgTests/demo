@@ -1,5 +1,8 @@
 import 'dotenv/config'
 import { defineConfig, devices } from "@playwright/test";
+import { execSync } from "node:child_process";
+
+const qaUsername = process.env.QA_USERNAME || execSync('git config user.name', { encoding: 'utf8' }).trim() || 'unknown';
 
 export default defineConfig({
   testDir: "./tests",
@@ -21,26 +24,26 @@ export default defineConfig({
     //      * Your server url
     //      * @see https://github.com/CyborgTests/playwright-reports-server
     //      */
-    //     url: "http://localhost:3000",
+    //     url: process.env.PLAYWRIGHT_REPORTS_SERVER_URL,
     //     // Set token if your server instance has authentication enabled
     //     // token: '1234',
     //     reportPath: "test-results/blob.zip",
     //     // Any custom metadata to attach to this blob (strings)
     //     resultDetails: {
     //       manual: true,
-    //       executedBy: process.env.CYBORGTESTS_OWNER || "unknown",
-    //       testRun: "demo-run-2",
+    //       executedBy: qaUsername,
+    //       testRun: "regression-07-10-2025",
     //     },
-    //     // Automatically trigger HTML report generation, shards supported
-    //     triggerReportGeneration: true,
+    //     // Automatically trigger HTML report generation on result uploaded, shards supported
+    //     triggerReportGeneration: false,
     //   },
     // ],
-    ["html", { open: "on-failure" }],
+    ["html", { open: "never" }],
     ["list"],
   ],
   use: {
     trace: "retain-on-failure",
-    video: "on",
+    video: 'retain-on-failure',
     screenshot: {
       mode: "on",
       fullPage: true,
@@ -50,10 +53,11 @@ export default defineConfig({
   },
   projects: [
     {
-      // grep: new RegExp(process.env.QA_USERNAME || execSync('git config user.name', { encoding: 'utf8' }).trim() || ""),
+      grep: new RegExp(`@${qaUsername}`),
       name: "cyborg",
       use: {
         ...devices["Desktop Chrome"],
+        channel: "chrome",
       },
     },
   ],
