@@ -6,16 +6,6 @@ test(
   "products page should be displayed correctly",
   {
     tag: [OWNER.O_KHOTEMSKYI],
-    annotation: [
-      {
-        type: "objective",
-        description: "Verify that the products page is displayed correctly",
-      },
-      {
-        type: "bug",
-        description: "https://github.com/CyborgTests/",
-      },
-    ],
   },
   async ({ page, manualStep }) => {
     await page.goto("/shop/brand/Nizhyn");
@@ -64,15 +54,8 @@ test(
 );
 
 test(
-  "product listing display",
+  "product listing should display products correctly",
   {
-    annotation: [
-      {
-        type: "objective",
-        description:
-          "Ensure that the product listing page displays products correctly",
-      },
-    ],
     tag: [OWNER.BILL_GATES],
   },
   async ({ page, manualStep }) => {
@@ -88,15 +71,8 @@ test(
 );
 
 test(
-  "product detail view",
+  "product detail view should display comprehensive information",
   {
-    annotation: [
-      {
-        type: "objective",
-        description:
-          "Verify that clicking on a product leads to its detail page with comprehensive information",
-      },
-    ],
     tag: [OWNER.SAM_ALTMAN],
   },
   async ({ page, manualStep }) => {

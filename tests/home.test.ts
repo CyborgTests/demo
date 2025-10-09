@@ -2,7 +2,7 @@ import test from "@cyborgtests/test";
 import { OWNER } from "../tags";
 
 test(
-  "homepage load and branding",
+  "homepage should load and display branding elements",
   {
     annotation: [
       {
@@ -26,7 +26,7 @@ test(
 );
 
 test(
-  "responsive design on mobile devices",
+  "responsive design should adapt correctly on mobile devices",
   {
     annotation: [
       {
@@ -53,15 +53,8 @@ test(
 );
 
 test(
-  "search functionality",
+  "search functionality should return relevant product results",
   {
-    annotation: [
-      {
-        type: "objective",
-        description:
-          "Verify that the search feature returns relevant product results",
-      },
-    ],
     tag: [OWNER.O_KHOTEMSKYI],
   },
   async ({ page, manualStep }) => {

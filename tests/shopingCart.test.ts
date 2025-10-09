@@ -2,14 +2,8 @@ import test from "@cyborgtests/test";
 import { OWNER } from "../tags";
 
 test(
-  "add to cart functionality",
+  "bdd: add to cart functionality should be successful",
   {
-    annotation: [
-      {
-        type: "objective",
-        description: "Test the ability to add a product to the shopping cart",
-      },
-    ],
     tag: [OWNER.O_KHOTEMSKYI],
   },
   async ({ page, manualStep }) => {
@@ -26,15 +20,8 @@ test(
 );
 
 test(
-  "shopping cart quantity update",
+  "bdd: shopping cart quantity update should be successful",
   {
-    annotation: [
-      {
-        type: "objective",
-        description:
-          "Ensure that users can update product quantities in the cart",
-      },
-    ],
     tag: [OWNER.BILL_GATES],
   },
   async ({ page, manualStep }) => {
@@ -50,15 +37,8 @@ test(
 );
 
 test(
-  "checkout process with empty cart",
+  "bdd: checkout process with empty cart should be prevented",
   {
-    annotation: [
-      {
-        type: "objective",
-        description:
-          "Ensure that the checkout process cannot proceed with an empty cart",
-      },
-    ],
     tag: [OWNER.BILL_GATES],
   },
   async ({ page, manualStep }) => {

@@ -2,7 +2,7 @@ import test from "@cyborgtests/test";
 import { OWNER } from "../tags";
 
 test(
-  "user registration process",
+  "user registration should be successful",
   {
     annotation: [
       {
@@ -24,7 +24,7 @@ test(
 );
 
 test(
-  "user login with valid credentials",
+  "user login with valid credentials should be successful",
   {
     annotation: [
       {
