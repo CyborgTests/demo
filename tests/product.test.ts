@@ -5,7 +5,7 @@ import { OWNER } from "../tags";
 test(
   "products page should be displayed correctly",
   {
-    tag: [OWNER.KHOTEMSKYI],
+    tag: [OWNER.O_KHOTEMSKYI],
     annotation: [
       {
         type: "objective",
@@ -15,7 +15,7 @@ test(
         type: "bug",
         description: "https://github.com/CyborgTests/",
       },
-    ]
+    ],
   },
   async ({ page, manualStep }) => {
     await page.goto("/shop/brand/Nizhyn");
@@ -29,7 +29,7 @@ test(
 test(
   "product details page should be displayed correctly",
   {
-    tag: [OWNER.KHOTEMSKYI],
+    tag: [OWNER.O_KHOTEMSKYI],
   },
   async ({ page, manualStep }) => {
     await page.goto("/product/cherry-tomatoes");
@@ -51,7 +51,7 @@ test(
 test(
   "product in cart should be displayed correctly",
   {
-    tag: [OWNER.KHOTEMSKYI],
+    tag: [OWNER.O_KHOTEMSKYI],
   },
   async ({ page, manualStep }) => {
     await page.goto("/product/cherry-tomatoes");
@@ -60,5 +60,51 @@ test(
       page.getByRole("button", { name: "Proceed To Checkout" })
     ).toBeVisible();
     await manualStep("Verify that product is added to cart");
+  }
+);
+
+test(
+  "product listing display",
+  {
+    annotation: [
+      {
+        type: "objective",
+        description:
+          "Ensure that the product listing page displays products correctly",
+      },
+    ],
+    tag: [OWNER.BILL_GATES],
+  },
+  async ({ page, manualStep }) => {
+    await page.goto("/shop");
+    await manualStep(
+      "Navigate to a product category or the main product listing page"
+    );
+    await manualStep("Observe the list of products displayed");
+    await manualStep(
+      "Verify products are displayed with images, names, prices, and any relevant labels (e.g., 'New', 'Sale')"
+    );
+  }
+);
+
+test(
+  "product detail view",
+  {
+    annotation: [
+      {
+        type: "objective",
+        description:
+          "Verify that clicking on a product leads to its detail page with comprehensive information",
+      },
+    ],
+    tag: [OWNER.SAM_ALTMAN],
+  },
+  async ({ page, manualStep }) => {
+    await page.goto("/shop");
+    await manualStep("Click on a product from the listing page");
+    await manualStep("Observe the product detail page");
+    await manualStep(
+      "Verify the product detail page displays the product image, name, price, description, available sizes/colors, and an 'Add to Cart' button"
+    );
   }
 );

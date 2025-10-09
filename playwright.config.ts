@@ -4,6 +4,8 @@ import { execSync } from "node:child_process";
 
 const qaUsername = process.env.QA_USERNAME || execSync('git config user.name', { encoding: 'utf8' }).trim() || 'unknown';
 
+console.log(qaUsername);
+
 export default defineConfig({
   testDir: "./tests",
   fullyParallel: false,
